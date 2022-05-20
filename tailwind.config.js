@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        Algemeen: {
+        algemeen: {
           10: '#1a0a05',
           20: '#33130b',
           40: '#662715',
@@ -12,7 +12,7 @@ module.exports = {
           80: '#cc4e2a',
           100: '#ff6135',
         },
-        Erfgoed: {
+        erfgoed: {
           10: '#1a0908',
           20: '#33120f',
           40: '#66241e',
@@ -21,6 +21,19 @@ module.exports = {
           80: '#cc473b',
           100: '#ff594a',
         },
+        base: {
+          100: '#F2F2F2',
+        },
+      },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+      },
+      gridTemplateColumns: {
+        layout: '4rem 1fr 4rem',
+      },
+      gridTemplateRows: {
+        layout: '4rem 1fr',
+        cards: 'minmax(20%,40%) 1fr',
       },
     },
   },

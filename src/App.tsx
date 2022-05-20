@@ -1,17 +1,10 @@
-import { useState } from 'react'
-import { Building, Map } from 'lucide-react'
-import { Sidebar } from './components/SideBar'
-import { TopBarNav } from './components/TopBarNav'
-import { Content } from './components/Content'
+import Routes from './components/Routes'
+import Navbar from './components/Navbar'
+import { useParams } from 'react-router-dom'
+//require('dotenv').config()
 
 function App() {
-  return (
-    <div>
-      <Sidebar />
-      <TopBarNav />
-      <Content />
-    </div>
-  )
+  return <Routes />
 }
 
 export default App
