@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react'
 
 function App() {
-  return <div className="App">Hello</div>;
+  return (
+    <div>
+      <div className="App">Hello</div>
+      {/* @ts-ignore */}
+      <p>env test: {window['env']['APIurl']}</p>
+    </div>
+  )
 }
 
-export default App;
+export default App
