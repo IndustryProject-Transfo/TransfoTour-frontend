@@ -30,6 +30,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         layout: '4rem 1fr 4rem',
+        data: '70% 30%',
       },
       gridTemplateRows: {
         layout: '4rem 1fr',
