@@ -16,7 +16,6 @@ import {
   BarElement,
   ChartData,
   ChartOptions,
-  Tick,
 } from 'chart.js'
 import { Loader2 } from 'lucide-react'
 
@@ -34,33 +33,55 @@ ChartJS.register(
 export default () => {
   const { building } = useParams()
   const [buildingData] = useBuilding(building!)
-  const [influxData, setInfluxData] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [tab, setTab] = useState(0)
-  const [dataChart, setDataChart] = useState<ChartData>()
+  const emptyChart = {
+    labels: [],
+    datasets: [],
+  }
 
-  function getData() {
+  const [dataChart, setDataChart] = useState<ChartData<'bar'>>(emptyChart)
+
+  function setChartByTab() {
+    //set time by tab
+    setLoading(true)
+    //setDataChart(emptyChart)
+    const time = ['daily', 'monthly', 'yearly']
+    console.log(dataChart)
+    //check if buildingData is loaded
     if (buildingData) {
       get(
-        `https://enm1-flask.azurewebsites.net/api/v1/transfo/power/usage/${buildingData?.naam}/daily`,
+        `https://enm1-flask.azurewebsites.net/api/v1/transfo/power/usage/${buildingData?.naam}/${time[tab]}`,
       )
         .then((data) => {
-          setInfluxData(data.values['TotaalNet'])
+          setDataChart({
+            labels: data.values['TotaalNet'].map((reading: any) => {
+              const d = new Date(reading.time)
+              //TODO if tab day => getHour() else getDate() else getMonth()
+              switch (tab) {
+                case 0:
+                  return `${d.getDate()}`
+                case 1:
+                  return `${d.getDate()}`
+                case 2:
+                  return `${d.toISOString()}`
+              }
+            }),
+            datasets: [
+              //TODO foreach categorie create data object
+              {
+                label: `${buildingData?.categorie}`,
+                data: data.values['TotaalNet'].map(
+                  (reading: any) => reading.value / 1000,
+                ),
 
-          const influxData: any[] = []
-
-          data.values['TotaalNet'].map((reading: any) => {
-            influxData.push(reading.value)
+                //TODO set color by categorie
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+              },
+            ],
           })
 
-          switch (tab) {
-            case 1:
-              break
-            case 2:
-              break
-            default:
-              break
-          }
           setLoading(false)
         })
         .catch((err) => {
@@ -94,29 +115,9 @@ export default () => {
     },
   }
 
-  const labels = influxData.map((reading: any) => {
-    const d = new Date(reading.time)
-    return `${d.getDate()}`
-  })
-
-  const data2 = {
-    labels,
-    datasets: [
-      {
-        label: `${buildingData?.categorie}`,
-        data: influxData.map((reading: any) => reading.value / 1000),
-
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-    ],
-  }
-
-  useEffect(getData, [buildingData])
-
   useEffect(() => {
-    console.log('Test')
-  }, [tab])
+    setChartByTab()
+  }, [buildingData, tab])
 
   return (
     <>
@@ -160,7 +161,7 @@ export default () => {
               </button>
             </ul>
 
-            <Bar options={options} data={data2} className={'max-h-64'} />
+            <Bar options={options} data={dataChart} className={'max-h-64'} />
           </div>
 
           <div className="flex flex-col justify-around">
