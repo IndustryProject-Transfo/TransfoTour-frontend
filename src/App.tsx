@@ -1,13 +1,10 @@
-import { useState } from 'react'
+import Routes from './routes/Routes'
+import Navbar from './components/Navbar'
+import { useParams } from 'react-router-dom'
+//require('dotenv').config()
 
 function App() {
-  return (
-    <div>
-      <div className="App">Hello</div>
-      {/* @ts-ignore */}
-      <p>env test: {window['env']['APIurl']}</p>
-    </div>
-  )
+  return <Routes />
 }
 
 export default App
