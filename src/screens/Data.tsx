@@ -18,6 +18,7 @@ import {
   ChartOptions,
 } from 'chart.js'
 import { Loader2 } from 'lucide-react'
+import SectionTitle from '../components/SectionTitle'
 
 ChartJS.register(
   CategoryScale,
@@ -40,13 +41,28 @@ export default () => {
     datasets: [],
   }
 
+  const months = [
+    'Januari',
+    'Februari',
+    'Maart',
+    'April',
+    'Mei',
+    'Juni',
+    'Juli',
+    'Augustus',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+
   const [dataChart, setDataChart] = useState<ChartData<'bar'>>(emptyChart)
 
   function setChartByTab() {
     //set time by tab
     setLoading(true)
     //setDataChart(emptyChart)
-    const time = ['daily', 'monthly', 'yearly']
+    const time = ['daily', 'daily', 'monthly']
     console.log(dataChart)
     //check if buildingData is loaded
     if (buildingData) {
@@ -64,7 +80,7 @@ export default () => {
                 case 1:
                   return `${d.getDate()}`
                 case 2:
-                  return `${d.toISOString()}`
+                  return months[d.getMonth()]
               }
             }),
             datasets: [
@@ -121,13 +137,10 @@ export default () => {
 
   return (
     <>
-      {isLoading ? (
-        <div className="flex h-full items-center justify-center">
-          <Loader2 className="animate-spin text-algemeen-72" size={48} />
-        </div>
-      ) : (
-        <div className="grid h-full grid-cols-data">
-          <div className="flex flex-col justify-between">
+      <div className="flex h-full gap-6">
+        <div className="flex flex-auto flex-col">
+          <SectionTitle title="Data" />
+          <div className="flex h-full flex-col justify-between bg-white p-4">
             <ul role="tablist" className="flex">
               <button
                 className={`${
@@ -146,6 +159,7 @@ export default () => {
                 onClick={() => {
                   setTab(1)
                 }}
+                disabled={isLoading}
               >
                 Maand
               </button>
@@ -156,34 +170,43 @@ export default () => {
                 onClick={() => {
                   setTab(2)
                 }}
+                disabled={isLoading}
               >
                 Jaar
               </button>
             </ul>
-
-            <Bar options={options} data={dataChart} className={'max-h-64'} />
+            {isLoading ? (
+              <div className="flex h-full items-center justify-center">
+                <Loader2 className="animate-spin text-algemeen-72" size={48} />
+              </div>
+            ) : (
+              <Bar
+                options={options}
+                data={dataChart}
+                className={'max-h-72 px-4'}
+              />
+            )}
           </div>
+        </div>
 
-          <div className="flex flex-col justify-around">
-            <div className="flex flex-col items-center">
-              <p>Huidig Vermogen</p>
-              <p>40Kw</p>
+        <div className="flex flex-col">
+          <SectionTitle title="Algemene Data" />
+          <div className="flex h-full flex-col justify-between">
+            <div className="flex flex-col items-center rounded bg-white px-8 py-4">
+              <p className="font-roboto text-xl">Huidig Vermogen</p>
+              <p className="font-roboto text-2xl">40Kw</p>
             </div>
-            <div className="flex flex-col items-center">
-              <p>Aantal euro bespaard</p>
-              <p>40Kw</p>
+            <div className="flex flex-col items-center rounded bg-white px-8 py-4">
+              <p className="font-roboto">Aantal euro bespaard</p>
+              <p className="font-roboto text-2xl">40Kw</p>
             </div>
-            <div className="flex flex-col items-center">
-              <p>Current Power</p>
-              <p>40Kw</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <p>Current Power</p>
-              <p>40Kw</p>
+            <div className="flex flex-col items-center rounded bg-white px-8 py-4">
+              <p className="font-roboto">Current Power</p>
+              <p className="font-roboto text-2xl">40Kw</p>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </>
   )
 }
