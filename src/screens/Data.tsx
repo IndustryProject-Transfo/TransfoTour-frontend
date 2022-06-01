@@ -177,7 +177,7 @@ export default () => {
             </ul>
             {isLoading ? (
               <div className="flex h-full items-center justify-center">
-                <Loader2 className="animate-spin text-algemeen-72" size={48} />
+                <Loader2 className="animate-spin text-verbruik-72" size={48} />
               </div>
             ) : (
               <Bar
@@ -194,15 +194,15 @@ export default () => {
           <div className="flex h-full flex-col justify-between">
             <div className="flex flex-col items-center rounded bg-white px-8 py-4">
               <p className="font-roboto text-xl">Huidig Vermogen</p>
-              <p className="font-roboto text-2xl">40Kw</p>
+              <p className="font-roboto text-2xl">0Kw</p>
             </div>
             <div className="flex flex-col items-center rounded bg-white px-8 py-4">
               <p className="font-roboto">Aantal euro bespaard</p>
-              <p className="font-roboto text-2xl">40Kw</p>
+              <p className="font-roboto text-2xl">0Kw</p>
             </div>
             <div className="flex flex-col items-center rounded bg-white px-8 py-4">
               <p className="font-roboto">Current Power</p>
-              <p className="font-roboto text-2xl">40Kw</p>
+              <p className="font-roboto text-2xl">0Kw</p>
             </div>
           </div>
         </div>

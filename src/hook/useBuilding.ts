@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Gebouw } from '../interfaces/Building'
 import { get } from '../utils/data-acces'
 
@@ -14,7 +14,7 @@ export const useBuilding = (buildingId: string) => {
       .catch((error) => {
         console.error('Error:', error)
       })
-  },[buildingId])
+  }, [buildingId])
 
   return [buildingData]
 }

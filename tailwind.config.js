@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        algemeen: {
+        verbruik: {
           10: '#1a0a05',
           20: '#33130b',
           40: '#662715',
@@ -25,7 +25,7 @@ module.exports = {
           80: '#CC473B',
           100: '#FF594A',
         },
-        evenementen: {
+        opslag: {
           10: '#1A1407',
           20: '#33290E',
           30: '#66511B',
@@ -43,7 +43,7 @@ module.exports = {
           80: '#89B6CC',
           100: '#ACE4FF',
         },
-        toerisme: {
+        productie: {
           10: '#161A0D',
           20: '#2C3319',
           40: '#596633',
