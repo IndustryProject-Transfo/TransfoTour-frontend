@@ -63,6 +63,7 @@ module.exports = {
       gridTemplateRows: {
         layout: '4rem 1fr',
         cards: 'minmax(20%,40%) 1fr',
+        map: '1fr minmax(0, 30%)',
       },
       flex: {
         2: '2 1 0%',

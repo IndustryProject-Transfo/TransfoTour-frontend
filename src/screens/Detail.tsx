@@ -7,7 +7,7 @@ import SectionTitle from '../components/SectionTitle'
 import Tag from '../components/Tag'
 import { useBuilding } from '../hook/useBuilding'
 import { useBuildings } from '../hook/useBuildings'
-import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
+import { getFilteredList } from '../utils/filterList'
 import Transfo from '/src/assets/transfo.png'
 
 export default () => {
@@ -16,24 +16,10 @@ export default () => {
   const [buildingsData] = useBuildings()
   const [filter, setFilter] = useState('')
 
-  function setFilterByCategory(category: string) {
-    setFilter(category)
-  }
-
-  function getFilteredList() {
-    buildingsData.sort((a, b) => (a.volgorde > b.volgorde ? 1 : -1))
-
-    if (!filter) {
-      return buildingsData
-    }
-
-    return buildingsData!.filter((item) => {
-      if (item.categorie)
-        return item.categorie.includes(capitalizeFirstLetter(filter))
-    })
-  }
-
-  let filteredList = useMemo(getFilteredList, [filter, buildingsData])
+  let filteredList = useMemo(
+    () => getFilteredList(buildingsData, filter),
+    [filter, buildingsData],
+  )
 
   return (
     <Page>
@@ -78,7 +64,6 @@ export default () => {
                 )}
               </div>
               <div className="flex flex-1 flex-col items-center justify-center">
-                {/* <img src="/src/assets/QR.png" alt="QR code" className="w-2/5" /> */}
                 <div className="flex items-center rounded bg-ondernemen-80 p-2">
                   <div className="relative  pr-2">
                     <p className="rounded bg-white p-1 text-center font-roboto text-sm">
@@ -4992,23 +4977,19 @@ export default () => {
           <div className="mb-2 flex justify-between">
             <SectionTitle title="plattegrond" className="mb-0" />
             <ul className="flex gap-3">
-              <li className="flex items-center rounded bg-verbruik-72 px-3 font-roboto text-sm text-white">
-                <button onClick={() => setFilterByCategory('')}>All</button>
+              <li className="flex items-center rounded bg-verbruik-72 px-3 py-1 font-roboto text-sm text-white">
+                <button onClick={() => setFilter('')}>All</button>
               </li>
-              <li className="flex items-center rounded bg-productie-80 px-3 font-roboto text-sm text-white">
-                <button onClick={() => setFilterByCategory('productie')}>
+              <li className="flex items-center rounded bg-productie-80 px-3 py-1 font-roboto text-sm text-white">
+                <button onClick={() => setFilter('productie')}>
                   Productie
                 </button>
               </li>
-              <li className="flex items-center rounded bg-opslag-100 px-3 font-roboto text-sm text-white">
-                <button onClick={() => setFilterByCategory('opslag')}>
-                  Opslag
-                </button>
+              <li className="flex items-center rounded bg-opslag-100 px-3 py-1 font-roboto text-sm text-white">
+                <button onClick={() => setFilter('opslag')}>Opslag</button>
               </li>
-              <li className="flex items-center rounded bg-verbruik-100 px-3 font-roboto text-sm text-white">
-                <button onClick={() => setFilterByCategory('verbruik')}>
-                  Verbruik
-                </button>
+              <li className="flex items-center rounded bg-verbruik-100 px-3 py-1 font-roboto text-sm text-white">
+                <button onClick={() => setFilter('verbruik')}>Verbruik</button>
               </li>
             </ul>
           </div>
@@ -5243,10 +5224,12 @@ export default () => {
                         key={buildingData.id}
                       >
                         <button className="flex w-full items-center justify-between p-1">
-                          <p className="font-roboto">{buildingData.naam}</p>
+                          <p className="text-left font-roboto">
+                            {buildingData.naam}
+                          </p>
                           {buildingData.categorie ? (
-                            <div
-                              className={`h-4 w-4 rounded-full ${
+                            <span
+                              className={`aspect-square w-4 rounded-full ${
                                 buildingData.categorie &&
                                 buildingData?.categorie[0].toLowerCase() ==
                                   'productie'
@@ -5255,9 +5238,9 @@ export default () => {
                                     buildingData?.categorie[0].toLowerCase() +
                                     '-100'
                               }`}
-                            ></div>
+                            />
                           ) : (
-                            <div className="h-4 w-4 rounded-full border border-gray-400"></div>
+                            <span className="aspect-square	w-4 min-w-min	flex-auto rounded-full border border-gray-400" />
                           )}
                         </button>
                       </Link>

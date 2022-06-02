@@ -1,3 +1,15 @@
-export default ({ children }: { children: React.ReactNode }) => {
-  return <div className="rounded drop-shadow">{children}</div>
+export default ({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) => {
+  return (
+    <div
+      className={`rounded bg-white p-4 drop-shadow ${className && className}`}
+    >
+      {children}
+    </div>
+  )
 }

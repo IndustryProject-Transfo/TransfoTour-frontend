@@ -49,6 +49,5 @@ export const useFacts = (buildingData: Gebouw) => {
     getFacts()
   }, [buildingData])
 
-  console.log(facts)
   return [facts]
 }
