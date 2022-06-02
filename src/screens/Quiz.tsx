@@ -1,12 +1,14 @@
 import { CheckCircle2, Flag, Loader2, XCircle, Zap } from 'lucide-react'
-import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import SectionTitle from '../components/SectionTitle'
+import { useEffect, useState } from 'react'
+import Confetti from 'react-confetti'
 import { useBuilding } from '../hook/useBuilding'
 import { Quiz } from '../interfaces/Quiz'
 import { get } from '../utils/data-acces'
 
-import Confetti from 'react-confetti'
+import SectionTitle from '../components/SectionTitle'
+
+import { ReactComponent as TransfoLogo } from '/src/assets/svg/TransfoLogo.svg'
 
 export default () => {
   const { building } = useParams()
@@ -68,21 +70,7 @@ export default () => {
         <SectionTitle title="Quiz" />
         <div className="flex flex-auto gap-6">
           <div className="flex w-80 flex-col items-center justify-center rounded bg-white p-4 text-center font-roboto text-2xl">
-            <svg
-              version="1.1"
-              id="Layer_1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              viewBox="0 0 287 518"
-              className="block w-24 "
-            >
-              <polygon
-                className="st0 fill-red-600"
-                points="205.06,64.71 53.09,284.01 147.35,284.01 81.94,453.29 233.91,233.99 139.65,233.99 "
-              />
-            </svg>
+            <TransfoLogo className="st0 block w-24 fill-red-600" />
             <h1>Transfo Zwevegem</h1>
           </div>
 
