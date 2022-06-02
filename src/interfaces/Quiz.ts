@@ -1,3 +1,5 @@
 export interface Quiz {
-    vraag: string
+  vraag: string
+  opties: string[]
+  antwoord: string
 }

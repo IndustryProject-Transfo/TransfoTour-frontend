@@ -18,7 +18,9 @@ export default ({
           <h1 className="font-roboto text-2xl font-bold text-black">
             {capitalizeFirstLetter(title)}
           </h1>
-          <h2 className="font-roboto text-base">{categorie.join(' - ')}</h2>
+          <h2 className="font-roboto text-base">
+            {categorie && categorie.join(' - ')}
+          </h2>
         </div>
 
         {title != 'Transfo' ? (
@@ -27,11 +29,11 @@ export default ({
               <NavLink
                 to={`info`}
                 className={({ isActive }) =>
-                  'text-md flex h-full w-16 flex-col items-center justify-center font-roboto ' +
+                  'text-md flex h-full w-16 flex-col items-center justify-center font-roboto text-gray-700 ' +
                   (isActive ? 'border-b-4 border-verbruik-72' : '')
                 }
               >
-                <Info size={20} />
+                <Info size={20} className="text-gray-500" />
                 Info
               </NavLink>
             </li>
@@ -39,11 +41,11 @@ export default ({
               <NavLink
                 to={`data`}
                 className={({ isActive }) =>
-                  'flex h-full w-16 flex-col items-center justify-center font-roboto ' +
+                  'flex h-full w-16 flex-col items-center justify-center font-roboto text-gray-700 ' +
                   (isActive ? 'border-b-4 border-verbruik-72' : '')
                 }
               >
-                <Database size={20} />
+                <Database size={20} className="text-gray-500" />
                 Data
               </NavLink>
             </li>
@@ -51,11 +53,11 @@ export default ({
               <NavLink
                 to={`quiz`}
                 className={({ isActive }) =>
-                  'flex h-full w-16 flex-col items-center justify-center font-roboto ' +
+                  'flex h-full w-16 flex-col items-center justify-center font-roboto text-gray-700 ' +
                   (isActive ? 'border-b-4 border-verbruik-72' : '')
                 }
               >
-                <FileText size={20} />
+                <FileText size={20} className="text-gray-500" />
                 Quiz
               </NavLink>
             </li>
@@ -65,8 +67,11 @@ export default ({
         )}
       </div>
       <button className="flex items-center justify-center">
-        <Link to={'/'} className="flex flex-col items-center">
-          <Factory size={20} />
+        <Link
+          to={'/'}
+          className="flex flex-col items-center font-roboto text-gray-700"
+        >
+          <Factory size={20} className="text-gray-500" />
           Home
         </Link>
       </button>

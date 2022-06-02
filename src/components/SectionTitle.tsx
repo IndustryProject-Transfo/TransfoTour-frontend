@@ -7,7 +7,7 @@ export default ({
 }) => {
   return (
     <h1
-      className={`mb-2 font-roboto text-xl font-bold text-base-200 ${
+      className={`mb-2 font-roboto text-lg font-medium text-base-200 ${
         className ? className : ''
       }`}
     >

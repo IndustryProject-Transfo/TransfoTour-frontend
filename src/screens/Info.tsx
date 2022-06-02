@@ -1,4 +1,4 @@
-import { Lightbulb } from 'lucide-react'
+import { Lightbulb, Loader2 } from 'lucide-react'
 import { useParams } from 'react-router-dom'
 import SectionTitle from '../components/SectionTitle'
 import { useBuilding } from '../hook/useBuilding'
@@ -14,20 +14,33 @@ export default () => {
       <div className="flex h-full gap-6">
         <div className="flex flex-1 flex-col">
           <SectionTitle title="info" />
-          <div className="flex-auto rounded bg-white p-4 font-roboto">
-            <p className="max-h-80 overflow-auto">{buildingData?.info}</p>
+          <div className="flex-auto rounded bg-white p-8 font-roboto">
+            {buildingData ? (
+              <p className="max-h-80 overflow-auto leading-loose	 transition	">
+                {buildingData?.info}
+              </p>
+            ) : (
+              <div className="flex h-full items-center justify-center">
+                <Loader2 className="animate-spin text-verbruik-72" size={48} />
+              </div>
+            )}
           </div>
         </div>
 
         <div className="flex flex-1 flex-col">
           <SectionTitle title="wist je dat?" />
+          {/* {buildingData ? ( */}
           <div className="flex flex-auto flex-col gap-6">
-            <div className="flex flex-1 gap-4 rounded bg-white">
+            <div className="flex flex-1 gap-4 overflow-hidden rounded bg-white">
               <div
-                className={`flex items-center justify-center ${
-                  buildingData?.categorie[0].toLowerCase() == 'productie'
-                    ? 'bg-productie-80'
-                    : 'bg-' + buildingData?.categorie[0].toLowerCase() + '-100'
+                className={`flex items-center justify-center transition-colors ${
+                  buildingData?.categorie
+                    ? buildingData?.categorie[0].toLowerCase() == 'productie'
+                      ? 'bg-productie-80'
+                      : 'bg-' +
+                        buildingData?.categorie[0].toLowerCase() +
+                        '-100'
+                    : 'bg-gray-400'
                 } px-6`}
               >
                 <Lightbulb size={48} className="text-white" />
@@ -37,12 +50,16 @@ export default () => {
               </p>
             </div>
 
-            <div className="flex flex-1 gap-4 rounded bg-white">
+            <div className="flex flex-1 gap-4 overflow-hidden rounded bg-white">
               <div
-                className={`flex items-center justify-center ${
-                  buildingData?.categorie[0].toLowerCase() == 'productie'
-                    ? 'bg-productie-80'
-                    : 'bg-' + buildingData?.categorie[0].toLowerCase() + '-100'
+                className={`flex items-center justify-center transition-colors ${
+                  buildingData?.categorie
+                    ? buildingData?.categorie[0].toLowerCase() == 'productie'
+                      ? 'bg-productie-80'
+                      : 'bg-' +
+                        buildingData?.categorie[0].toLowerCase() +
+                        '-100'
+                    : 'bg-gray-400'
                 } px-6`}
               >
                 <Lightbulb size={48} className="text-white" />
@@ -54,16 +71,21 @@ export default () => {
               </p>
             </div>
 
-            <div className="flex flex-1 gap-4 rounded bg-white">
+            <div className="flex flex-1 gap-4 overflow-hidden rounded bg-white">
               <div
-                className={`flex items-center justify-center ${
-                  buildingData?.categorie[0].toLowerCase() == 'productie'
-                    ? 'bg-productie-80'
-                    : 'bg-' + buildingData?.categorie[0].toLowerCase() + '-100'
+                className={`flex items-center justify-center transition-colors ${
+                  buildingData?.categorie
+                    ? buildingData?.categorie[0].toLowerCase() == 'productie'
+                      ? 'bg-productie-80'
+                      : 'bg-' +
+                        buildingData?.categorie[0].toLowerCase() +
+                        '-100'
+                    : 'bg-gray-400'
                 } px-6`}
               >
                 <Lightbulb size={48} className="text-white" />
               </div>
+
               <p className="flex items-center font-roboto">
                 {facts[2]
                   ? facts[2]
@@ -71,6 +93,11 @@ export default () => {
               </p>
             </div>
           </div>
+          {/* // ) : (
+          //   <div className="flex h-full items-center justify-center">
+          //     <Loader2 className="animate-spin text-verbruik-72" size={48} />
+          //   </div>
+          // )} */}
         </div>
       </div>
     </>

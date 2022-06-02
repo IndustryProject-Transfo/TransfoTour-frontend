@@ -59,15 +59,13 @@ export default () => {
   const [dataChart, setDataChart] = useState<ChartData<'bar'>>(emptyChart)
 
   function setChartByTab() {
-    //set time by tab
     setLoading(true)
-    //setDataChart(emptyChart)
-    const time = ['daily', 'daily', 'monthly']
-    console.log(dataChart)
-    //check if buildingData is loaded
+    setDataChart(emptyChart)
+    const time = ['hourly', 'daily', 'monthly']
+    console.log(buildingData?.influx_naam)
     if (buildingData) {
       get(
-        `https://enm1-flask.azurewebsites.net/api/v1/transfo/power/usage/${buildingData?.naam}/${time[tab]}`,
+        `https://enm1-flask.azurewebsites.net/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time[tab]}`,
       )
         .then((data) => {
           setDataChart({
@@ -76,7 +74,7 @@ export default () => {
               //TODO if tab day => getHour() else getDate() else getMonth()
               switch (tab) {
                 case 0:
-                  return `${d.getDate()}`
+                  return `${d.getHours()}`
                 case 1:
                   return `${d.getDate()}`
                 case 2:
@@ -84,16 +82,27 @@ export default () => {
               }
             }),
             datasets: [
-              //TODO foreach categorie create data object
               {
-                label: `${buildingData?.categorie}`,
+                label: `${
+                  buildingData.categorie
+                    ? buildingData?.categorie[0]
+                    : 'verbruik'
+                }`,
                 data: data.values['TotaalNet'].map(
                   (reading: any) => reading.value / 1000,
                 ),
 
-                //TODO set color by categorie
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                backgroundColor: `${
+                  buildingData?.categorie
+                    ? buildingData?.categorie[0].toLowerCase() == 'productie'
+                      ? 'rgba(160, 184, 91, 0.8)'
+                      : buildingData?.categorie[0].toLowerCase() == 'opslag'
+                      ? 'rgba(255, 203, 68, 0.8)'
+                      : buildingData?.categorie[0].toLowerCase() == 'verbruik'
+                      ? 'rgba(255, 97, 53, 0.8)'
+                      : 'rgba(255, 99, 132, 0.5)'
+                    : 'rgba(255, 99, 132, 0.5)'
+                }`,
               },
             ],
           })
@@ -140,41 +149,79 @@ export default () => {
       <div className="flex h-full gap-6">
         <div className="flex flex-auto flex-col">
           <SectionTitle title="Data" />
-          <div className="flex h-full flex-col justify-between bg-white p-4">
-            <ul role="tablist" className="flex">
-              <button
-                className={`${
-                  tab == 0 ? 'bg-red-700 text-white' : 'bg-none'
-                } mr-2 rounded px-6 py-1 font-roboto`}
-                onClick={() => {
-                  setTab(0)
-                }}
-              >
-                Dag
-              </button>
-              <button
-                className={`${
-                  tab == 1 ? 'bg-red-700 text-white' : 'bg-none'
-                } mr-2 rounded px-6 py-1 font-roboto`}
-                onClick={() => {
-                  setTab(1)
-                }}
-                disabled={isLoading}
-              >
-                Maand
-              </button>
-              <button
-                className={`${
-                  tab == 2 ? 'bg-red-700 text-white' : 'bg-none'
-                } mr-2 rounded px-6 py-1 font-roboto`}
-                onClick={() => {
-                  setTab(2)
-                }}
-                disabled={isLoading}
-              >
-                Jaar
-              </button>
-            </ul>
+          <div className="flex h-full flex-col justify-between rounded bg-white p-4">
+            {buildingData ? (
+              <ul role="tablist" className="flex">
+                <button
+                  className={`${
+                    tab == 0
+                      ? `${
+                          buildingData?.categorie
+                            ? buildingData?.categorie[0].toLowerCase() ==
+                              'productie'
+                              ? 'bg-productie-80'
+                              : 'bg-' +
+                                buildingData?.categorie[0].toLowerCase() +
+                                '-100'
+                            : 'bg-verbruik-72'
+                        } text-white`
+                      : 'bg-none'
+                  } mr-2 rounded px-6 py-1 font-roboto transition-colors`}
+                  onClick={() => {
+                    setTab(0)
+                  }}
+                >
+                  Dag
+                </button>
+                <button
+                  className={`${
+                    tab == 1
+                      ? `${
+                          buildingData?.categorie
+                            ? buildingData?.categorie[0].toLowerCase() ==
+                              'productie'
+                              ? 'bg-productie-80'
+                              : 'bg-' +
+                                buildingData?.categorie[0].toLowerCase() +
+                                '-100'
+                            : 'bg-verbruik-72'
+                        } text-white`
+                      : 'bg-none'
+                  } mr-2 rounded px-6 py-1 font-roboto transition-colors`}
+                  onClick={() => {
+                    setTab(1)
+                  }}
+                  disabled={isLoading}
+                >
+                  Maand
+                </button>
+                <button
+                  className={`${
+                    tab == 2
+                      ? `${
+                          buildingData?.categorie
+                            ? buildingData?.categorie[0].toLowerCase() ==
+                              'productie'
+                              ? 'bg-productie-80'
+                              : 'bg-' +
+                                buildingData?.categorie[0].toLowerCase() +
+                                '-100'
+                            : 'bg-verbruik-72'
+                        } text-white`
+                      : 'bg-none'
+                  } mr-2 rounded px-6 py-1 font-roboto transition-colors`}
+                  onClick={() => {
+                    setTab(2)
+                  }}
+                  disabled={isLoading}
+                >
+                  Jaar
+                </button>
+              </ul>
+            ) : (
+              <></>
+            )}
+
             {isLoading ? (
               <div className="flex h-full items-center justify-center">
                 <Loader2 className="animate-spin text-verbruik-72" size={48} />
@@ -191,18 +238,18 @@ export default () => {
 
         <div className="flex flex-col">
           <SectionTitle title="Algemene Data" />
-          <div className="flex h-full flex-col justify-between">
-            <div className="flex flex-col items-center rounded bg-white px-8 py-4">
+          <div className="grid h-full grid-rows-3 gap-6">
+            <div className="flex flex-col items-center justify-center rounded bg-white px-8 ">
               <p className="font-roboto text-xl">Huidig Vermogen</p>
-              <p className="font-roboto text-2xl">0Kw</p>
+              <p className="font-roboto text-2xl text-gray-600">0 kW</p>
             </div>
-            <div className="flex flex-col items-center rounded bg-white px-8 py-4">
-              <p className="font-roboto">Aantal euro bespaard</p>
-              <p className="font-roboto text-2xl">0Kw</p>
+            <div className="flex flex-col items-center justify-center rounded bg-white px-8 ">
+              <p className="font-roboto text-xl">Aantal euro bespaard</p>
+              <p className="font-roboto text-2xl text-gray-600">0 kW</p>
             </div>
-            <div className="flex flex-col items-center rounded bg-white px-8 py-4">
-              <p className="font-roboto">Current Power</p>
-              <p className="font-roboto text-2xl">0Kw</p>
+            <div className="flex flex-col items-center justify-center rounded bg-white px-8 ">
+              <p className="font-roboto text-xl">Current Power</p>
+              <p className="font-roboto text-2xl">0 kW</p>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import Airtable, { FieldSet } from 'airtable'
 const { VITE_APP_BASE, VITE_APP_KEY } = import.meta.env
 
 export const getAirtable = async (table: string, record?: string) => {
-  var base = new Airtable({ apiKey: `${VITE_APP_KEY}` }).base(
+  let base = new Airtable({ apiKey: `${VITE_APP_KEY}` }).base(
     `${VITE_APP_BASE}`,
   )
 
