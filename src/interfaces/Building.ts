@@ -8,6 +8,7 @@ export interface Gebouw {
   id: string
   naam: string
   influx_naam: string
+  building_id: number
   categorie: string[]
   profielfoto: profielfoto[]
   info: string
