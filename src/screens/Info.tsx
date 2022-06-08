@@ -1,5 +1,4 @@
 import { Lightbulb, Loader2 } from 'lucide-react'
-import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import SectionTitle from '../components/SectionTitle'
 import { useBuilding } from '../hook/useBuilding'
@@ -9,14 +8,6 @@ export default () => {
   const { building } = useParams()
   const [buildingData] = useBuilding(building!)
   const [facts] = useFacts(buildingData!)
-
-  let [online, isOnline] = useState(navigator.onLine)
-  console.log(online)
-  
-  const setOnline = () => {
-    console.log('We are online!')
-    isOnline(true)
-  }
 
   return (
     <>

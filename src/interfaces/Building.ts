@@ -1,7 +1,16 @@
 import { FieldSet } from 'airtable'
 
+interface large {
+  url: string
+}
+
+interface thumbnails {
+  large: large
+}
+
 interface profielfoto {
   url: string
+  thumbnails: thumbnails
 }
 
 export interface Gebouw {
