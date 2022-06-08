@@ -86,21 +86,6 @@ export default defineConfig({
               },
             },
           },
-          {
-            urlPattern: /^https:\/\/dl\.airtable\.com\/\.attachments\/.*/i,
-            handler: 'NetworkFirst',
-            options: {
-              networkTimeoutSeconds: 10,
-              cacheName: 'images',
-              expiration: {
-                maxEntries: 40,
-                maxAgeSeconds: 60 * 60 * 24, // <== 1 day
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
         ],
       },
     }),
