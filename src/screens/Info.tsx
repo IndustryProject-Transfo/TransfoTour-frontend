@@ -1,4 +1,5 @@
 import { Lightbulb, Loader2 } from 'lucide-react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import SectionTitle from '../components/SectionTitle'
 import { useBuilding } from '../hook/useBuilding'
@@ -9,6 +10,14 @@ export default () => {
   const [buildingData] = useBuilding(building!)
   const [facts] = useFacts(buildingData!)
 
+  let [online, isOnline] = useState(navigator.onLine)
+  console.log(online)
+  
+  const setOnline = () => {
+    console.log('We are online!')
+    isOnline(true)
+  }
+
   return (
     <>
       <div className="flex h-full gap-6">
@@ -16,7 +25,7 @@ export default () => {
           <SectionTitle title="info" />
           <div className="flex-auto rounded bg-white p-8 font-roboto">
             {buildingData ? (
-              <p className="max-h-80 overflow-auto leading-loose transition	">
+              <p className="max-h-72 overflow-auto pr-6 leading-loose transition	">
                 {buildingData?.info}
               </p>
             ) : (
@@ -40,9 +49,9 @@ export default () => {
                         buildingData?.categorie[0].toLowerCase() +
                         '-100'
                     : 'bg-gray-400'
-                } px-6`}
+                }`}
               >
-                <Lightbulb size={48} className="text-white" />
+                <Lightbulb size={48} className="mx-6 text-white" />
               </div>
               <p className="flex items-center font-roboto">
                 {facts[0] ? facts[0] : 'De Transfo site sinds 1913 bestaat.'}
@@ -59,9 +68,9 @@ export default () => {
                         buildingData?.categorie[0].toLowerCase() +
                         '-100'
                     : 'bg-gray-400'
-                } px-6`}
+                }`}
               >
-                <Lightbulb size={48} className="text-white" />
+                <Lightbulb size={48} className="mx-6 text-white" />
               </div>
               <p className="flex items-center font-roboto">
                 {facts[1]
@@ -80,9 +89,9 @@ export default () => {
                         buildingData?.categorie[0].toLowerCase() +
                         '-100'
                     : 'bg-gray-400'
-                } px-6`}
+                }`}
               >
-                <Lightbulb size={48} className="text-white" />
+                <Lightbulb size={48} className="mx-6 text-white" />
               </div>
 
               <p className="flex items-center font-roboto">

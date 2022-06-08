@@ -30,19 +30,19 @@ export default () => {
           <div className="grid h-full grid-cols-2 gap-4 overflow-hidden rounded bg-white pr-4">
             {buildingData ? (
               buildingData.profielfoto ? (
-                <div className="overflow-hidden">
+                <div className="aspect-w-4 aspect-h-3">
                   <img
                     src={`${buildingData?.profielfoto[0].url}`}
                     alt={`${buildingData?.naam}`}
-                    className="h-full w-full object-cover"
+                    className="h-full overflow-hidden object-cover"
                   />
                 </div>
               ) : (
-                <div className="overflow-hidden">
+                <div className="aspect-w-4 aspect-h-3">
                   <img
                     src={Transfo}
                     alt="Transfo"
-                    className="h-full w-full object-cover"
+                    className="h-full overflow-hidden object-cover"
                   />
                 </div>
               )
@@ -53,7 +53,7 @@ export default () => {
               />
             )}
 
-            <div role="social media tags" className="my-4 flex flex-col gap-1">
+            <div className="my-4 flex flex-col gap-1">
               <div className="flex max-h-24 flex-1 flex-wrap gap-1 overflow-y-auto overflow-x-hidden">
                 {buildingData?.hashtags && buildingData?.hashtags.length > 0 ? (
                   buildingData?.hashtags.map((tag) => (
@@ -63,6 +63,7 @@ export default () => {
                   <></>
                 )}
               </div>
+
               <div className="flex flex-1 flex-col items-center justify-center">
                 <div className="flex items-center rounded bg-ondernemen-80 p-2">
                   <div className="relative  pr-2">
@@ -5229,7 +5230,7 @@ export default () => {
                           </p>
                           {buildingData.categorie ? (
                             <span
-                              className={`aspect-square w-4 rounded-full ${
+                              className={`h-4 w-4 flex-shrink-0 rounded-full ${
                                 buildingData.categorie &&
                                 buildingData?.categorie[0].toLowerCase() ==
                                   'productie'
@@ -5240,7 +5241,7 @@ export default () => {
                               }`}
                             />
                           ) : (
-                            <span className="aspect-square	w-4 min-w-min	flex-auto rounded-full border border-gray-400" />
+                            <span className="h-4 w-4 flex-shrink-0 rounded-full border border-gray-400" />
                           )}
                         </button>
                       </Link>

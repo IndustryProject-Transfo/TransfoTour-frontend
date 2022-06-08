@@ -16,6 +16,8 @@ export default () => {
     [filter, buildingsData],
   )
 
+  console.log(buildingsData)
+
   return (
     <Page>
       <Navbar />
@@ -42,7 +44,7 @@ export default () => {
               <Loader2 className="animate-spin text-verbruik-72" size={48} />
             </div>
           ) : (
-            <div className="grid max-h-36 auto-rows-auto grid-cols-4 gap-x-8 gap-y-2 overflow-y-auto px-8">
+            <div className="grid max-h-32 auto-rows-auto grid-cols-5 gap-x-8 gap-y-2 overflow-y-auto px-8">
               <>
                 {filteredList.map((building) => (
                   <Link
@@ -52,7 +54,7 @@ export default () => {
                   >
                     {building.categorie ? (
                       <span
-                        className={`aspect-square w-4 rounded-full ${
+                        className={`h-4 w-4 flex-shrink-0 rounded-full ${
                           building.categorie &&
                           building?.categorie[0].toLowerCase() == 'productie'
                             ? 'bg-productie-80'
@@ -62,9 +64,9 @@ export default () => {
                         }`}
                       />
                     ) : (
-                      <span className="aspect-square w-4 rounded-full border border-gray-400" />
+                      <span className="h-4 w-4 flex-shrink-0 rounded-full border border-gray-400" />
                     )}
-                    <p className="ml-2 font-roboto">{building.naam}</p>
+                    <p className="ml-2 font-roboto text-sm">{building.naam}</p>
                   </Link>
                 ))}
               </>

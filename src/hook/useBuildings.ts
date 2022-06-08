@@ -6,7 +6,9 @@ export const useBuildings = () => {
   const [buildingsData, setBuildingsData] = useState<Gebouw[]>([])
 
   function getBuildings() {
-    get(`https://api.airtable.com/v0/appS16VafPZAqBNVV/Gebouwen`)
+    get(
+      `https://api.airtable.com/v0/appS16VafPZAqBNVV/Gebouwen?fields%5B%5D=id&fields%5B%5D=naam&fields%5B%5D=categorie`,
+    )
       .then((data) => {
         //console.log('Succes:', data)
         const tempArray: Gebouw[] = []
