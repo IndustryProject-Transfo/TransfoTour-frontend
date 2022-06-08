@@ -115,7 +115,7 @@ export default () => {
 
           <div className="flex h-full gap-1 rounded bg-white p-4">
             <div className="flex flex-1 items-center justify-center">
-              <TransfoMap selectedBuilding={building} />
+              <TransfoMap selectedBuilding={buildingData?.building_id} />
             </div>
             <div className="flex max-h-52 flex-1 flex-col divide-y-2 overflow-auto rounded border p-2 ">
               {buildingsData && buildingsData.length > 0 ? (

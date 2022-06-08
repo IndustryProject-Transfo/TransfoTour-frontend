@@ -52,6 +52,9 @@ module.exports = {
           80: '#B1CC65',
           100: '#DDFF7F',
         },
+        selection: {
+          10: '#B84035 !important',
+        },
       },
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
