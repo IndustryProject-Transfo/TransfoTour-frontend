@@ -1,11 +1,13 @@
 import { Loader2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useBuildings } from '../hook/useBuildings'
+import { getFilteredList } from '../utils/filterList'
+
 import Card from '../components/Card'
 import Navbar from '../components/Navbar'
 import Page from '../components/Page'
-import { useBuildings } from '../hook/useBuildings'
-import { getFilteredList } from '../utils/filterList'
+import ModelViewer from '../components/ModelViewer'
 
 export default () => {
   const [buildingsData] = useBuildings()
@@ -22,7 +24,9 @@ export default () => {
     <Page>
       <Navbar />
       <main className="grid h-full grid-rows-map gap-8 bg-base-100 py-6 px-16">
-        <div className="bg-white">Map</div>
+        <div className="bg-white">
+          <ModelViewer />
+        </div>
         <Card>
           <ul className="border-b-gray mb-2 flex justify-center gap-3 border-b-2 pb-2">
             <li className="flex items-center rounded bg-verbruik-72 px-3 py-1 font-roboto text-sm text-white">
