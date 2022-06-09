@@ -5,10 +5,18 @@ import { Suspense } from 'react'
 
 import HDR from '../assets/model/adamsbridge.hdr?url'
 import TransfoModel from './TransfoModel'
+import { Gebouw } from '../interfaces/Building'
+import { NavigateFunction } from 'react-router-dom'
 
 extend({ SSAOPass })
 
-function ModelViewer() {
+function ModelViewer({
+  data,
+  navigator,
+}: {
+  data: Gebouw[]
+  navigator: NavigateFunction
+}) {
   return (
     <Suspense fallback={null}>
       <Canvas
@@ -48,7 +56,7 @@ function ModelViewer() {
         />
         <Environment files={HDR} />
         <Sky />
-        <TransfoModel />
+        <TransfoModel data={data} navigator={navigator} />
       </Canvas>
     </Suspense>
   )

@@ -1,6 +1,6 @@
 import { Loader2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useBuildings } from '../hook/useBuildings'
 import { getFilteredList } from '../utils/filterList'
 
@@ -12,6 +12,7 @@ import ModelViewer from '../components/ModelViewer'
 export default () => {
   const [buildingsData] = useBuildings()
   const [filter, setFilter] = useState('')
+  const navigate = useNavigate()
 
   let filteredList = useMemo(
     () => getFilteredList(buildingsData, filter),
@@ -25,7 +26,7 @@ export default () => {
       <Navbar />
       <main className="grid h-full grid-rows-map gap-8 bg-base-100 py-6 px-16">
         <div className="bg-white">
-          <ModelViewer />
+          <ModelViewer data={buildingsData} navigator={navigate} />
         </div>
         <Card>
           <ul className="border-b-gray mb-2 flex justify-center gap-3 border-b-2 pb-2">

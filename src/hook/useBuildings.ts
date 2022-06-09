@@ -7,7 +7,7 @@ export const useBuildings = () => {
 
   function getBuildings() {
     get(
-      `https://api.airtable.com/v0/appS16VafPZAqBNVV/Gebouwen?fields%5B%5D=id&fields%5B%5D=naam&fields%5B%5D=categorie`,
+      `https://api.airtable.com/v0/appS16VafPZAqBNVV/Gebouwen?fields%5B%5D=id&fields%5B%5D=naam&fields%5B%5D=categorie&fields%5B%5D=building_id`,
     )
       .then((data) => {
         //console.log('Succes:', data)
