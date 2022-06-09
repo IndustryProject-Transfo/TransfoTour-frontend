@@ -8,8 +8,8 @@ import Tag from '../components/Tag'
 import { useBuilding } from '../hook/useBuilding'
 import { useBuildings } from '../hook/useBuildings'
 import { getFilteredList } from '../utils/filterList'
-import Transfo from '/src/assets/transfo.png'
-import { Detector, Offline, Online } from 'react-detect-offline'
+import Transfo from '../assets/transfo.png'
+import { Detector } from 'react-detect-offline'
 
 export default () => {
   const { building } = useParams()
