@@ -19,8 +19,6 @@ export default () => {
     [filter, buildingsData],
   )
 
-  console.log(buildingsData)
-
   return (
     <Page>
       <Navbar />

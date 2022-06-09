@@ -30,30 +30,30 @@ export default () => {
           <SectionTitle title="gebouw" />
           <div className="grid h-full grid-cols-2 gap-4 overflow-hidden rounded bg-white pr-4">
             {/* <Online> */}
-              {buildingData ? (
-                buildingData.profielfoto ? (
-                  <div className="aspect-w-4 aspect-h-3">
-                    <img
-                      src={`${buildingData?.profielfoto[0].thumbnails.large.url}`}
-                      alt={`${buildingData?.naam}`}
-                      className="h-full overflow-hidden object-cover"
-                    />
-                  </div>
-                ) : (
-                  <div className="aspect-w-4 aspect-h-3">
-                    <img
-                      src={Transfo}
-                      alt="Transfo"
-                      className="h-full overflow-hidden object-cover"
-                    />
-                  </div>
-                )
+            {buildingData ? (
+              buildingData.profielfoto ? (
+                <div className="aspect-w-4 aspect-h-3">
+                  <img
+                    src={`${buildingData?.profielfoto[0].thumbnails.large.url}`}
+                    alt={`${buildingData?.naam}`}
+                    className="h-full overflow-hidden object-cover"
+                  />
+                </div>
               ) : (
-                <Loader2
-                  className="m-auto animate-spin text-verbruik-72"
-                  size={48}
-                />
-              )}
+                <div className="aspect-w-4 aspect-h-3">
+                  <img
+                    src={Transfo}
+                    alt="Transfo"
+                    className="h-full overflow-hidden object-cover"
+                  />
+                </div>
+              )
+            ) : (
+              <Loader2
+                className="m-auto animate-spin text-verbruik-72"
+                size={48}
+              />
+            )}
             {/* </Online> */}
             {/* <Offline>
               <Loader2
@@ -5230,10 +5230,11 @@ export default () => {
                   (buildingData) =>
                     buildingData.id != building && (
                       <Detector
+                        key={buildingData.id}
                         render={({ online }) => (
                           <Link
                             to={`../${buildingData.id}/info`}
-                            key={buildingData.id}
+
                             // className={`${!online && 'pointer-events-none'}`}
                           >
                             <button className="flex w-full items-center justify-between p-1">
