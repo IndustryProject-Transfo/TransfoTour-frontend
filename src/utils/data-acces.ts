@@ -1,9 +1,9 @@
-export const get = (url: string) => {
-  const { VITE_APP_KEY } = import.meta.env
+export const get = async (url: string) => {
+  const AIR_TABLE_KEY = window['env']['AIRTABLE_KEY']
 
-  return fetch(url, {
+  return await fetch(url, {
     headers: {
-      Authorization: 'Bearer ' + VITE_APP_KEY,
+      Authorization: 'Bearer ' + AIR_TABLE_KEY,
       'Content-Type': 'application/json',
     },
   }).then((response) => response.json())

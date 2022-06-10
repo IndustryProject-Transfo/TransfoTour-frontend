@@ -5,39 +5,35 @@ import Logo from './Logo'
 
 export default ({
   title = 'Transfo',
-  categorie = '',
+  categorie = [],
 }: {
   title?: string
-  categorie?: string
+  categorie?: string[]
 }) => {
   return (
     <nav className=" grid grid-cols-layout">
       <Logo />
       <div className="relative flex flex-1 items-center">
-        <h1
-          className={`ml-4 font-roboto text-3xl font-bold ${
-            categorie.toLowerCase() == 'productie'
-              ? 'text-green-600'
-              : categorie.toLowerCase() == 'opslag'
-              ? 'text-orange-600'
-              : categorie.toLowerCase() == 'verbruik'
-              ? 'text-red-600'
-              : 'text-black'
-          }`}
-        >
-          {capitalizeFirstLetter(title)}
-        </h1>
+        <div className="ml-4 flex flex-col justify-center">
+          <h1 className="font-roboto text-2xl font-bold text-black">
+            {capitalizeFirstLetter(title)}
+          </h1>
+          <h2 className="font-roboto text-base">
+            {categorie && categorie.join(' - ')}
+          </h2>
+        </div>
+
         {title != 'Transfo' ? (
           <ul className="absolute left-2/4 right-2/4 flex h-16 justify-center gap-12">
             <li>
               <NavLink
                 to={`info`}
                 className={({ isActive }) =>
-                  'text-md flex h-full w-16 flex-col items-center justify-center font-roboto ' +
-                  (isActive ? 'border-b-4 border-algemeen-72' : undefined)
+                  'text-md flex h-full w-16 flex-col items-center justify-center font-roboto text-gray-700 ' +
+                  (isActive ? 'border-b-4 border-verbruik-72' : '')
                 }
               >
-                <Info size={20} />
+                <Info size={20} className="text-gray-500" />
                 Info
               </NavLink>
             </li>
@@ -45,11 +41,11 @@ export default ({
               <NavLink
                 to={`data`}
                 className={({ isActive }) =>
-                  'flex h-full w-16 flex-col items-center justify-center font-roboto ' +
-                  (isActive ? 'border-b-4 border-algemeen-72' : undefined)
+                  'flex h-full w-16 flex-col items-center justify-center font-roboto text-gray-700 ' +
+                  (isActive ? 'border-b-4 border-verbruik-72' : '')
                 }
               >
-                <Database size={20} />
+                <Database size={20} className="text-gray-500" />
                 Data
               </NavLink>
             </li>
@@ -57,11 +53,11 @@ export default ({
               <NavLink
                 to={`quiz`}
                 className={({ isActive }) =>
-                  'flex h-full w-16 flex-col items-center justify-center font-roboto ' +
-                  (isActive ? 'border-b-4 border-algemeen-72' : '')
+                  'flex h-full w-16 flex-col items-center justify-center font-roboto text-gray-700 ' +
+                  (isActive ? 'border-b-4 border-verbruik-72' : '')
                 }
               >
-                <FileText size={20} />
+                <FileText size={20} className="text-gray-500" />
                 Quiz
               </NavLink>
             </li>
@@ -71,8 +67,11 @@ export default ({
         )}
       </div>
       <button className="flex items-center justify-center">
-        <Link to={'/'} className="flex flex-col items-center">
-          <Factory size={20} />
+        <Link
+          to={'/'}
+          className="flex flex-col items-center font-roboto text-gray-700"
+        >
+          <Factory size={20} className="text-gray-500" />
           Home
         </Link>
       </button>
