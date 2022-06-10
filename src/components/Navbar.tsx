@@ -15,8 +15,9 @@ export default ({
       <Logo />
       <div className="relative flex flex-1 items-center">
         <div className="ml-4 flex flex-col justify-center">
-          <h1 className="font-roboto text-2xl font-bold text-black">
+          <h1 className="max-w-[23rem] overflow-hidden text-ellipsis whitespace-nowrap font-roboto text-2xl font-bold text-black">
             {capitalizeFirstLetter(title)}
+            {/* Sociaal woonproject eigen haard is goud waard nietwaar baert */}
           </h1>
           <h2 className="font-roboto text-base">
             {categorie && categorie.join(' - ')}
@@ -24,7 +25,7 @@ export default ({
         </div>
 
         {title != 'Transfo' ? (
-          <ul className="absolute left-2/4 right-2/4 flex h-16 justify-center gap-12">
+          <ul className="absolute left-2/4 right-2/4 flex h-16 w-fit -translate-x-2/4 justify-center gap-12 bg-white">
             <li>
               <NavLink
                 to={`info`}

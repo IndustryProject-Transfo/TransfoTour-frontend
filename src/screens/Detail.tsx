@@ -13,6 +13,8 @@ import Transfo from '../assets/transfo.png'
 import { ReactComponent as QRcode } from '../assets/svg/QRcode.svg'
 import { Detector } from 'react-detect-offline'
 import Tag from '../components/Tag'
+import FilterButtons from '../components/FilterButtons'
+import Card from '../components/Card'
 
 export default () => {
   const { building } = useParams()
@@ -31,7 +33,7 @@ export default () => {
       <main className="grid grid-flow-row grid-cols-4 grid-rows-cards gap-6 bg-base-100 py-6 px-16">
         <section className="col-span-2 flex flex-col justify-between">
           <SectionTitle title="gebouw" />
-          <div className="grid h-full grid-cols-2 gap-4 overflow-hidden rounded bg-white pr-4">
+          <Card className="grid h-full grid-cols-2 gap-4 overflow-hidden p-0 pr-4">
             {/* <Online> */}
             {buildingData ? (
               buildingData.profielfoto ? (
@@ -88,31 +90,16 @@ export default () => {
                 </div>
               </div>
             </div>
-          </div>
+          </Card>
         </section>
 
         <section className="col-span-2 flex flex-col justify-between">
           <div className="mb-2 flex justify-between">
             <SectionTitle title="plattegrond" className="mb-0" />
-            <ul className="flex gap-3">
-              <li className="flex items-center rounded bg-verbruik-72 px-3 py-1 font-roboto text-sm text-white">
-                <button onClick={() => setFilter('')}>All</button>
-              </li>
-              <li className="flex items-center rounded bg-productie-80 px-3 py-1 font-roboto text-sm text-white">
-                <button onClick={() => setFilter('productie')}>
-                  Productie
-                </button>
-              </li>
-              <li className="flex items-center rounded bg-opslag-100 px-3 py-1 font-roboto text-sm text-white">
-                <button onClick={() => setFilter('opslag')}>Opslag</button>
-              </li>
-              <li className="flex items-center rounded bg-verbruik-100 px-3 py-1 font-roboto text-sm text-white">
-                <button onClick={() => setFilter('verbruik')}>Verbruik</button>
-              </li>
-            </ul>
+            <FilterButtons setFilter={setFilter} />
           </div>
 
-          <div className="flex h-full gap-1 rounded bg-white p-4">
+          <Card className="flex h-full gap-1">
             <div className="flex flex-1 items-center justify-center">
               <TransfoMap selectedBuilding={buildingData?.building_id} />
             </div>
@@ -161,7 +148,7 @@ export default () => {
                 />
               )}
             </div>
-          </div>
+          </Card>
         </section>
 
         <section className="col-span-4">
