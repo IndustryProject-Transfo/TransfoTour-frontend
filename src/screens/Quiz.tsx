@@ -9,6 +9,7 @@ import { get } from '../utils/data-acces'
 import SectionTitle from '../components/SectionTitle'
 
 import { ReactComponent as TransfoLogo } from '../assets/svg/TransfoLogo.svg'
+import Card from '../components/Card'
 
 export default () => {
   const { building } = useParams()
@@ -69,12 +70,12 @@ export default () => {
       <div className="flex h-full flex-col">
         <SectionTitle title="Quiz" />
         <div className="flex flex-auto gap-6">
-          <div className="flex w-80 flex-col items-center justify-center rounded bg-white p-4 text-center font-roboto text-2xl">
+          <Card className="flex w-80 flex-col items-center justify-center text-center font-roboto text-2xl">
             <TransfoLogo className="st0 block w-24 fill-red-600" />
             <h1>Transfo Zwevegem</h1>
-          </div>
+          </Card>
 
-          <div className=" flex-1 rounded bg-white p-4">
+          <Card className="flex-1">
             {isLoading ? (
               <div className="flex h-full items-center justify-center">
                 <Loader2 className="animate-spin text-verbruik-72" size={48} />
@@ -204,7 +205,7 @@ export default () => {
                 </div>
               </>
             )}
-          </div>
+          </Card>
         </div>
       </div>
     </>

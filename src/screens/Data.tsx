@@ -17,8 +17,9 @@ import {
   ChartData,
   ChartOptions,
 } from 'chart.js'
-import { Loader2 } from 'lucide-react'
+import { Car, Loader2 } from 'lucide-react'
 import SectionTitle from '../components/SectionTitle'
+import Card from '../components/Card'
 
 ChartJS.register(
   CategoryScale,
@@ -36,6 +37,7 @@ export default () => {
   const [buildingData] = useBuilding(building!)
   const [isLoading, setLoading] = useState(true)
   const [tab, setTab] = useState(0)
+
   const emptyChart = {
     labels: [],
     datasets: [],
@@ -150,7 +152,7 @@ export default () => {
       <div className="flex h-full gap-6">
         <div className="flex flex-auto flex-col">
           <SectionTitle title="Data" />
-          <div className="flex h-full flex-col justify-between rounded bg-white p-4">
+          <Card className="flex h-full flex-col justify-between">
             {buildingData ? (
               <ul role="tablist" className="flex">
                 <button
@@ -234,24 +236,24 @@ export default () => {
                 className={'max-h-72 px-4'}
               />
             )}
-          </div>
+          </Card>
         </div>
 
         <div className="flex flex-col">
           <SectionTitle title="Algemene Data" />
           <div className="grid h-full grid-rows-3 gap-6">
-            <div className="flex flex-col items-center justify-center rounded bg-white px-8 ">
+            <Card className="flex flex-col items-center justify-center">
               <p className="font-roboto text-xl">Huidig Vermogen</p>
               <p className="font-roboto text-2xl text-gray-600">0 kW</p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded bg-white px-8 ">
+            </Card>
+            <Card className="flex flex-col items-center justify-center">
               <p className="font-roboto text-xl">Aantal euro bespaard</p>
               <p className="font-roboto text-2xl text-gray-600">0 kW</p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded bg-white px-8 ">
+            </Card>
+            <Card className="flex flex-col items-center justify-center">
               <p className="font-roboto text-xl">Current Power</p>
               <p className="font-roboto text-2xl">0 kW</p>
-            </div>
+            </Card>
           </div>
         </div>
       </div>
