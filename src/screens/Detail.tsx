@@ -10,9 +10,9 @@ import Navbar from '../components/Navbar'
 import Page from '../components/Page'
 import Transfo from '../assets/transfo.png'
 
-import { ReactComponent as QRcode } from '/src/assets/svg/qrcode.svg'
+import { ReactComponent as QRcode } from '../assets/svg/QRcode.svg'
 import { Detector } from 'react-detect-offline'
-import Tag from "../components/Tag"
+import Tag from '../components/Tag'
 
 export default () => {
   const { building } = useParams()

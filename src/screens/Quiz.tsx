@@ -8,7 +8,7 @@ import { get } from '../utils/data-acces'
 
 import SectionTitle from '../components/SectionTitle'
 
-import { ReactComponent as TransfoLogo } from '/src/assets/svg/TransfoLogo.svg'
+import { ReactComponent as TransfoLogo } from '../assets/svg/TransfoLogo.svg'
 
 export default () => {
   const { building } = useParams()
