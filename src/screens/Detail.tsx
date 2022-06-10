@@ -4,12 +4,10 @@ import { Loader2 } from 'lucide-react'
 import { useBuilding } from '../hook/useBuilding'
 import { useBuildings } from '../hook/useBuildings'
 import { getFilteredList } from '../utils/filterList'
-
 import SectionTitle from '../components/SectionTitle'
 import TransfoMap from '../components/TransfoMap'
 import Navbar from '../components/Navbar'
 import Page from '../components/Page'
-import Tag from '../components/Tag'
 import Transfo from '../assets/transfo.png'
 
 import { ReactComponent as QRcode } from '/src/assets/svg/qrcode.svg'
