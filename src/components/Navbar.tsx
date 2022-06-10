@@ -1,4 +1,4 @@
-import { Database, Factory, FileText, Info } from 'lucide-react'
+import { Database, Factory, FileText, Info, LineChart } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
 import Logo from './Logo'
@@ -46,7 +46,7 @@ export default ({
                   (isActive ? 'border-b-4 border-verbruik-72' : '')
                 }
               >
-                <Database size={20} className="text-gray-500" />
+                <LineChart size={20} className="text-gray-500" />
                 Data
               </NavLink>
             </li>
