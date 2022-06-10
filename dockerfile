@@ -2,7 +2,7 @@ FROM node:16.14.0 as build
 WORKDIR /app
 
 # Install dependencies
-COPY package*.json .
+COPY package*.json ./
 RUN npm i
 
 # Build web app
