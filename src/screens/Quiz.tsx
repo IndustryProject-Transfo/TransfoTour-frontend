@@ -20,7 +20,7 @@ export default () => {
   const [quiz, setQuiz] = useState<Quiz>()
 
   const quizStyling = [
-    { letter: 'A', color: 'bg-erfgoed-100' },
+    { letter: 'A', color: 'bg-verbruik-100' },
     { letter: 'B', color: 'bg-ondernemen-80' },
     { letter: 'C', color: 'bg-opslag-100' },
     { letter: 'D', color: 'bg-productie-80' },

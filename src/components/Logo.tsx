@@ -1,6 +1,6 @@
 export default () => {
   return (
-    <div className="flex items-center justify-center bg-verbruik-72">
+    <div className="flex items-center justify-center bg-algemeen-72">
       <svg
         version="1.1"
         id="Layer_1"

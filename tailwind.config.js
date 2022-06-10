@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        verbruik: {
+        algemeen: {
           10: '#1a0a05',
           20: '#33130b',
           40: '#662715',
@@ -16,7 +16,7 @@ module.exports = {
           100: '#F2F2F2',
           200: '#666666',
         },
-        erfgoed: {
+        verbruik: {
           10: '#1a0908',
           20: '#33120F',
           40: '#66241E',
