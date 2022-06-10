@@ -64,8 +64,9 @@ export default () => {
     const time = ['hourly', 'daily', 'monthly']
     console.log(buildingData?.influx_naam)
     if (buildingData) {
+      const API_URL = window['env']['API_INFLUX_URL']
       get(
-        `https://enm1-flask.azurewebsites.net/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time[tab]}`,
+        `${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time[tab]}?field=TotaalNet`,
       )
         .then((data) => {
           setDataChart({
