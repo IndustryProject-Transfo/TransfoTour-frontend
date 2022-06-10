@@ -12,6 +12,7 @@ import Transfo from '../assets/transfo.png'
 
 import { ReactComponent as QRcode } from '/src/assets/svg/qrcode.svg'
 import { Detector } from 'react-detect-offline'
+import Tag from "../components/Tag"
 
 export default () => {
   const { building } = useParams()
