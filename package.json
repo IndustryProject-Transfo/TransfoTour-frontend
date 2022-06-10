@@ -9,9 +9,8 @@
     "pwa": "npm run build && npx serve dist --single"
   },
   "dependencies": {
-    "@react-three/cannon": "^5.1.0",
-    "@react-three/drei": "^8.20.2",
-    "@react-three/fiber": "^7.0.26",
+    "@react-three/drei": "^9.13.0",
+    "@react-three/fiber": "^8.0.22",
     "@types/three": "^0.141.0",
     "@svgdotjs/svg.js": "^3.1.2",
     "airtable": "^0.11.4",
@@ -22,7 +21,7 @@
     "react-confetti": "^6.1.0",
     "react-detect-offline": "^2.4.5",
     "react-dom": "^18.0.0",
-    "three": "^0.139.0",
+    "three": "^0.141.0",
     "vite-plugin-svgr": "^2.1.0",
     "webfontloader": "^1.6.28"
   },
