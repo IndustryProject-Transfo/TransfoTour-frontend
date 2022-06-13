@@ -1,4 +1,4 @@
-import { CheckCircle2, Flag, Loader2, XCircle, Zap } from 'lucide-react'
+import { CheckCircle2, Loader2, XCircle } from 'lucide-react'
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-confetti'

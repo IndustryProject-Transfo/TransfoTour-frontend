@@ -37,7 +37,7 @@ export default () => {
             {/* <Online> */}
             {buildingData ? (
               buildingData.profielfoto ? (
-                <div className="aspect-w-4 aspect-h-3">
+                <div className="aspect-w-4 aspect-h-2">
                   <img
                     src={`${buildingData?.profielfoto[0].thumbnails.large.url}`}
                     alt={`${buildingData?.naam}`}
@@ -45,7 +45,7 @@ export default () => {
                   />
                 </div>
               ) : (
-                <div className="aspect-w-4 aspect-h-3">
+                <div className="aspect-w-4 aspect-h-2">
                   <img
                     src={Transfo}
                     alt="Transfo"
@@ -78,16 +78,8 @@ export default () => {
                 )}
               </div>
 
-              <div className="flex flex-1 flex-col items-center justify-center">
-                <div className="flex items-center rounded bg-ondernemen-80 p-2">
-                  <div className="relative  pr-2">
-                    <p className="rounded bg-white p-1 text-center font-roboto text-sm">
-                      Scan me!
-                    </p>
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2	 border-l-8 border-b-8 border-t-8 border-t-transparent border-b-transparent border-l-white"></div>
-                  </div>
-                  <QRcode className="h-20 w-20 rounded bg-white p-1" />
-                </div>
+              <div className="flex flex-1 flex-col items-end justify-end">
+                <QRcode className="h-24 w-auto rounded bg-white p-1" />
               </div>
             </div>
           </Card>
