@@ -83,9 +83,15 @@ export default () => {
 
               switch (tab) {
                 case 'uur':
-                  return `${d.getHours()}`
+                  return `${d.toLocaleString('nl-NL', {
+                    hour: 'numeric',
+                    hour12: false,
+                  })}:00`
                 case 'dag':
-                  return `${d.getDate()}`
+                  return `${d.toLocaleDateString('nl-NL', {
+                    day: 'numeric',
+                    month: 'long',
+                  })}`
                 case 'maand':
                   return months[d.getMonth()]
               }
