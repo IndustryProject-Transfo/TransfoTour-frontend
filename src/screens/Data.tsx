@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Bar } from 'react-chartjs-2'
 import { useParams } from 'react-router-dom'
 import { useBuilding } from '../hook/useBuilding'
+import useRealtimePower from '../hook/useRealtimeBuilding'
 import { get } from '../utils/data-acces'
 
 import {
@@ -20,6 +21,7 @@ import {
 import { Loader2 } from 'lucide-react'
 import SectionTitle from '../components/SectionTitle'
 import Card from '../components/Card'
+import { BuildingData } from '../interfaces/BuildingData'
 
 ChartJS.register(
   CategoryScale,
@@ -35,8 +37,12 @@ ChartJS.register(
 export default () => {
   const { building } = useParams()
   const [buildingData] = useBuilding(building!)
+  const realtimePower = useRealtimePower(buildingData?.influx_naam)
   const [isLoading, setLoading] = useState(true)
-  const [tab, setTab] = useState(0)
+  const [tab, setTab] = useState<'uur' | 'dag' | 'maand'>('uur')
+  const [buildingPower, setBuildingPower] = useState<
+    BuildingData[] | undefined
+  >()
 
   const emptyChart = {
     labels: [],
@@ -63,25 +69,24 @@ export default () => {
   function setChartByTab() {
     setLoading(true)
     setDataChart(emptyChart)
-    const time = ['hourly', 'daily', 'monthly']
-    console.log(buildingData?.influx_naam)
+    const time = { uur: 'hourly', dag: 'daily', maand: 'monthly' }[tab]
     if (buildingData) {
       const API_URL = window['env']['API_INFLUX_URL']
       get(
-        `http://${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time[tab]}?field=TotaalNet`,
+        `http://${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time}?field=TotaalNet`,
       )
         .then((data) => {
-          console.log(data)
+          setBuildingPower(data.values['TotaalNet'] as BuildingData[])
           setDataChart({
             labels: data.values['TotaalNet'].map((reading: any) => {
               const d = new Date(reading.time)
 
               switch (tab) {
-                case 0:
+                case 'uur':
                   return `${d.getHours()}`
-                case 1:
+                case 'dag':
                   return `${d.getDate()}`
-                case 2:
+                case 'maand':
                   return months[d.getMonth()]
               }
             }),
@@ -158,7 +163,7 @@ export default () => {
               <ul role="tablist" className="flex">
                 <button
                   className={`${
-                    tab == 0
+                    tab == 'uur'
                       ? `${
                           buildingData?.categorie
                             ? buildingData?.categorie[0].toLowerCase() ==
@@ -172,14 +177,14 @@ export default () => {
                       : 'bg-none'
                   } mr-2 rounded px-6 py-1 font-roboto transition-colors`}
                   onClick={() => {
-                    setTab(0)
+                    setTab('uur')
                   }}
                 >
                   Dag
                 </button>
                 <button
                   className={`${
-                    tab == 1
+                    tab == 'dag'
                       ? `${
                           buildingData?.categorie
                             ? buildingData?.categorie[0].toLowerCase() ==
@@ -193,7 +198,7 @@ export default () => {
                       : 'bg-none'
                   } mr-2 rounded px-6 py-1 font-roboto transition-colors`}
                   onClick={() => {
-                    setTab(1)
+                    setTab('dag')
                   }}
                   disabled={isLoading}
                 >
@@ -201,7 +206,7 @@ export default () => {
                 </button>
                 <button
                   className={`${
-                    tab == 2
+                    tab == 'maand'
                       ? `${
                           buildingData?.categorie
                             ? buildingData?.categorie[0].toLowerCase() ==
@@ -215,7 +220,7 @@ export default () => {
                       : 'bg-none'
                   } mr-2 rounded px-6 py-1 font-roboto transition-colors`}
                   onClick={() => {
-                    setTab(2)
+                    setTab('maand')
                   }}
                   disabled={isLoading}
                 >
@@ -244,16 +249,24 @@ export default () => {
           <SectionTitle title="Algemene Data" />
           <div className="grid h-full grid-rows-3 gap-6">
             <Card className="flex flex-col items-center justify-center">
-              <p className="font-roboto text-xl">Huidig Vermogen</p>
-              <p className="font-roboto text-2xl text-gray-600">0 kW</p>
+              <p className="font-roboto text-xl">Huidig verbruik</p>
+              <p className="font-roboto text-2xl text-gray-600">
+                {realtimePower?.toFixed(2) ?? '-'} kW
+              </p>
             </Card>
             <Card className="flex flex-col items-center justify-center">
-              <p className="font-roboto text-xl">Aantal euro bespaard</p>
-              <p className="font-roboto text-2xl text-gray-600">0 kW</p>
+              <p className="font-roboto text-xl">Prijs {tab} verbruik</p>
+              <p className="font-roboto text-2xl text-gray-600">
+                €{' '}
+                {((buildingPower?.at(-1)?.value ?? 0) * 0.291).toFixed(2) ??
+                  '-'}
+              </p>
             </Card>
             <Card className="flex flex-col items-center justify-center">
-              <p className="font-roboto text-xl">Current Power</p>
-              <p className="font-roboto text-2xl">0 kW</p>
+              <p className="font-roboto text-xl">Totaal verbruik {tab}</p>
+              <p className="font-roboto text-2xl text-gray-600">
+                {buildingPower?.at(-1)?.value?.toFixed(2) ?? '-'} kWh
+              </p>
             </Card>
           </div>
         </div>
