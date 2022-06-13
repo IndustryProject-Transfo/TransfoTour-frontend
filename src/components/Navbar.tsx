@@ -1,4 +1,4 @@
-import { Database, Factory, FileText, Info, LineChart } from 'lucide-react'
+import {  Factory, FileText, Info, LineChart } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter'
 import Logo from './Logo'

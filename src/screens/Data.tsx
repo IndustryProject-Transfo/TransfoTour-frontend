@@ -17,7 +17,7 @@ import {
   ChartData,
   ChartOptions,
 } from 'chart.js'
-import { Car, Loader2 } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import SectionTitle from '../components/SectionTitle'
 import Card from '../components/Card'
 
@@ -68,13 +68,14 @@ export default () => {
     if (buildingData) {
       const API_URL = window['env']['API_INFLUX_URL']
       get(
-        `${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time[tab]}?field=TotaalNet`,
+        `http://${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time[tab]}?field=TotaalNet`,
       )
         .then((data) => {
+          console.log(data)
           setDataChart({
             labels: data.values['TotaalNet'].map((reading: any) => {
               const d = new Date(reading.time)
-              //TODO if tab day => getHour() else getDate() else getMonth()
+
               switch (tab) {
                 case 0:
                   return `${d.getHours()}`
@@ -92,7 +93,7 @@ export default () => {
                     : 'verbruik'
                 }`,
                 data: data.values['TotaalNet'].map(
-                  (reading: any) => reading.value / 1000,
+                  (reading: any) => reading.value,
                 ),
 
                 backgroundColor: `${
