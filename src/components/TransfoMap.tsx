@@ -7,7 +7,7 @@ function TransfoMap({
   selectedBuilding: number | undefined
 }) {
   useEffect(() => {
-    console.log(`#Location_${selectedBuilding}`)
+    //console.log(`#Location_${selectedBuilding}`)
     // clear any previous selections
     let svg = SVG('#transfo-map')
     svg.children().forEach((child) => child.removeClass('fill-selection-10'))

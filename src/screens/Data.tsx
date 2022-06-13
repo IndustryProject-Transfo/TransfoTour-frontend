@@ -39,6 +39,7 @@ export default () => {
   const [buildingData] = useBuilding(building!)
   const realtimePower = useRealtimePower(buildingData?.influx_naam)
   const [isLoading, setLoading] = useState(true)
+  const [price, setPrice] = useState(0)
   const [tab, setTab] = useState<'uur' | 'dag' | 'maand'>('uur')
   const [buildingPower, setBuildingPower] = useState<
     BuildingData[] | undefined
@@ -66,6 +67,14 @@ export default () => {
 
   const [dataChart, setDataChart] = useState<ChartData<'bar'>>(emptyChart)
 
+  function getPrice() {
+    get('https://api.airtable.com/v0/appS16VafPZAqBNVV/Prijs?').then((data) => {
+      console.log(data.records[0].fields)
+      Object.keys(data.records[0].fields).length > 0 &&
+        setPrice(data.records[0].fields.huidig_energieprijs)
+    })
+  }
+
   function setChartByTab() {
     setLoading(true)
     setDataChart(emptyChart)
@@ -88,9 +97,8 @@ export default () => {
                     hour12: false,
                   })}:00`
                 case 'dag':
-                  return `${d.toLocaleDateString('nl-NL', {
-                    day: 'numeric',
-                    month: 'long',
+                  return `${d.toLocaleDateString('en-EN', {
+                    day: '2-digit',
                   })}`
                 case 'maand':
                   return months[d.getMonth()]
@@ -153,11 +161,16 @@ export default () => {
         },
       },
     },
+    locale: 'nl-NL',
   }
 
   useEffect(() => {
     setChartByTab()
   }, [buildingData, tab])
+
+  useEffect(() => {
+    getPrice()
+  }, [])
 
   return (
     <>
@@ -257,21 +270,31 @@ export default () => {
             <Card className="flex flex-col items-center justify-center">
               <p className="font-roboto text-xl">Huidig verbruik</p>
               <p className="font-roboto text-2xl text-gray-600">
-                {realtimePower?.toFixed(2) ?? '-'} kW
+                {realtimePower?.toLocaleString('NL-nl', {
+                  maximumFractionDigits: 2,
+                }) ?? '-'}{' '}
+                kW
               </p>
             </Card>
             <Card className="flex flex-col items-center justify-center">
               <p className="font-roboto text-xl">Prijs {tab} verbruik</p>
               <p className="font-roboto text-2xl text-gray-600">
                 €{' '}
-                {((buildingPower?.at(-1)?.value ?? 0) * 0.291).toFixed(2) ??
-                  '-'}
+                {((buildingPower?.at(-1)?.value ?? 0) * price).toLocaleString(
+                  'NL-nl',
+                  {
+                    maximumFractionDigits: 2,
+                  },
+                ) ?? '-'}
               </p>
             </Card>
             <Card className="flex flex-col items-center justify-center">
               <p className="font-roboto text-xl">Totaal verbruik {tab}</p>
               <p className="font-roboto text-2xl text-gray-600">
-                {buildingPower?.at(-1)?.value?.toFixed(2) ?? '-'} kWh
+                {buildingPower?.at(-1)?.value?.toLocaleString('NL-nl', {
+                  maximumFractionDigits: 0,
+                }) ?? '-'}{' '}
+                kWh
               </p>
             </Card>
           </div>
