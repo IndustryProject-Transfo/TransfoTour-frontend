@@ -73,7 +73,7 @@ export default () => {
     if (buildingData) {
       const API_URL = window['env']['API_INFLUX_URL']
       get(
-        `http://${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time}?field=TotaalNet`,
+        `${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time}?field=TotaalNet`,
       )
         .then((data) => {
           setBuildingPower(data.values['TotaalNet'] as BuildingData[])

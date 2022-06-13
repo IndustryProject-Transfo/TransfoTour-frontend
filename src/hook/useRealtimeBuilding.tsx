@@ -8,7 +8,7 @@ function useRealtimePower(influx_building: string | undefined) {
       const API_URL = window['env']['API_INFLUX_URL']
       if (influx_building) {
         fetch(
-          `http://${API_URL}/api/v1/transfo/power/usage/${influx_building}/realtime?field=TotaalNet`,
+          `${API_URL}/api/v1/transfo/power/usage/${influx_building}/realtime?field=TotaalNet`,
         )
           .then((res) => res.json())
           .then((data) => {
