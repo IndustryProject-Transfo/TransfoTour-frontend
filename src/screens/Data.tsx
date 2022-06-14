@@ -82,7 +82,7 @@ export default () => {
     if (buildingData) {
       const API_URL = window['env']['API_INFLUX_URL']
       get(
-        `${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time}?field=TotaalNet`,
+        `${API_URL}/api/v1/transfo/power/usage/${buildingData?.influx_naam}/${time}?field=TotaalNet&calendarTime=false`,
       )
         .then((data) => {
           setBuildingPower(data.values['TotaalNet'] as BuildingData[])
@@ -95,7 +95,7 @@ export default () => {
                   return `${d.toLocaleString('nl-NL', {
                     hour: 'numeric',
                     hour12: false,
-                  })}:00`
+                  })}u`
                 case 'dag':
                   return `${d.toLocaleDateString('en-EN', {
                     day: '2-digit',
@@ -144,7 +144,7 @@ export default () => {
       y: {
         ticks: {
           callback: function (value: string | number) {
-            return value + ' kW'
+            return value + ' kWh'
           },
           precision: 2,
         },
@@ -157,7 +157,7 @@ export default () => {
       tooltip: {
         callbacks: {
           label: function (context) {
-            return context.formattedValue + ' kW'
+            return context.formattedValue + ' kWh'
           },
         },
       },
