@@ -100,6 +100,7 @@ export default () => {
                             onClick={() => {
                               checkAnswer(i)
                             }}
+                            disabled={!hideAnswer}
                           >
                             <div
                               className={`${quizStyling[i].color} mr-6 px-3 py-1 font-roboto text-3xl text-white`}
