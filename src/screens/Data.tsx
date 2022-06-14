@@ -146,6 +146,7 @@ export default () => {
           callback: function (value: string | number) {
             return value + ' kW'
           },
+          precision: 2,
         },
       },
     },
