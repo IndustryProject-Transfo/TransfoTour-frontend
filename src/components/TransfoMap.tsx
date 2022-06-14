@@ -7,7 +7,7 @@ function TransfoMap({
   selectedBuilding: number | undefined
 }) {
   useEffect(() => {
-    console.log(`#Location_${selectedBuilding}`)
+    //console.log(`#Location_${selectedBuilding}`)
     // clear any previous selections
     let svg = SVG('#transfo-map')
     svg.children().forEach((child) => child.removeClass('fill-selection-10'))
@@ -270,6 +270,13 @@ function TransfoMap({
         points="274.07 179 278.07 197 274.07 198.03 275.07 202 280.07 201 284.07 220 296.07 218 287.07 177 274.07 179"
         id="Location_36"
       ></polygon>
+      <circle
+        className="fill-gray-400"
+        cx="750"
+        cy="190"
+        r="10.5"
+        id="Location_41"
+      ></circle>
     </svg>
   )
 }

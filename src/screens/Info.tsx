@@ -45,7 +45,7 @@ export default () => {
               >
                 <Lightbulb size={48} className="mx-6 text-white" />
               </div>
-              <p className="flex items-center font-roboto">
+              <p className="flex items-center pr-4 font-roboto">
                 {facts[0] ? facts[0] : 'De Transfo site sinds 1913 bestaat.'}
               </p>
             </Card>
@@ -64,7 +64,7 @@ export default () => {
               >
                 <Lightbulb size={48} className="mx-6 text-white" />
               </div>
-              <p className="flex items-center font-roboto">
+              <p className="flex items-center pr-4 font-roboto">
                 {facts[1]
                   ? facts[1]
                   : 'De Transfo site produceerde tot 1962 elektriciteit.'}
@@ -86,7 +86,7 @@ export default () => {
                 <Lightbulb size={48} className="mx-6 text-white" />
               </div>
 
-              <p className="flex items-center font-roboto">
+              <p className="flex items-center pr-4 font-roboto">
                 {facts[2]
                   ? facts[2]
                   : 'De Transfo site klimaatneutraal probeert te worden.'}

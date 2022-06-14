@@ -20,7 +20,11 @@ export default () => {
   const [score, setScore] = useState<number>(0)
   const [showScore, setShowScore] = useState(false)
 
-  const [quiz, setQuiz] = useState<Quiz>()
+  const [quiz, setQuiz] = useState<Quiz>({
+    vraag: '',
+    opties: [],
+    antwoord: '',
+  })
 
   const quizStyling = [
     { letter: 'A', color: 'bg-verbruik-100' },
@@ -100,6 +104,7 @@ export default () => {
                             onClick={() => {
                               checkAnswer(i)
                             }}
+                            disabled={!hideAnswer}
                           >
                             <div
                               className={`${quizStyling[i].color} mr-6 px-3 py-1 font-roboto text-3xl text-white`}
@@ -128,7 +133,7 @@ export default () => {
                   <div className="flex items-center gap-24">
                     <div className="h-3 flex-auto overflow-hidden rounded-xl bg-gray-100">
                       <div
-                        className={`h-full ${
+                        className={`h-full transition-all ${
                           buildingData?.categorie
                             ? buildingData?.categorie[0].toLowerCase() ==
                               'productie'
@@ -140,7 +145,8 @@ export default () => {
                         }`}
                         style={{
                           width: `${
-                            progressQuiz == 3 ? 100 : (progressQuiz + 1) * 25
+                            ((progressQuiz + 1) / buildingData!.quiz.length) *
+                            100
                           }%`,
                         }}
                       ></div>
@@ -150,7 +156,8 @@ export default () => {
                       onClick={() => {
                         if (progressQuiz <= 2) setProgressQuiz(progressQuiz + 1)
                         SetHideAnswer(true)
-                        if (progressQuiz == 3) setShowScore(true)
+                        if (progressQuiz == buildingData!.quiz.length - 1)
+                          setShowScore(true)
                       }}
                       disabled={hideAnswer}
                     >
@@ -186,7 +193,7 @@ export default () => {
                         dy=".3em"
                         className="font-roboto text-xs"
                       >
-                        {score}/4
+                        {score}/{buildingData?.quiz.length}
                       </text>
                       <circle
                         className="stroke-verbruik-72	"
@@ -195,7 +202,9 @@ export default () => {
                         r={15.91549430918954}
                         fill="transparent"
                         strokeWidth={3}
-                        strokeDasharray={`100 ${100 - score * 25}`}
+                        strokeDasharray={`100 ${
+                          100 - (score / buildingData!.quiz.length) * 100
+                        }`}
                         strokeDashoffset={100}
                         strokeLinecap="round"
                         transform="rotate(-90, 21,21)"
