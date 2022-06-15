@@ -1,4 +1,4 @@
-import { Loader2 } from 'lucide-react'
+import { Loader2, Info } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useBuildings } from '../hook/useBuildings'
@@ -9,10 +9,12 @@ import Navbar from '../components/Navbar'
 import Page from '../components/Page'
 import ModelViewer from '../components/ModelViewer'
 import FilterButtons from '../components/FilterButtons'
+import AboutModal from '../components/AboutModal'
 
 export default () => {
   const [buildingsData] = useBuildings()
   const [filter, setFilter] = useState('')
+  const [showAboutModal, setShowAboutModal] = useState(false)
   const navigate = useNavigate()
 
   let filteredList = useMemo(
@@ -22,9 +24,19 @@ export default () => {
 
   return (
     <Page>
+      <AboutModal
+        show={showAboutModal}
+        onChange={(state) => setShowAboutModal(state)}
+      />
+      <div
+        onClick={() => setShowAboutModal(true)}
+        className="absolute right-1 bottom-1 rounded-lg p-2"
+      >
+        <Info size={28} color="#6b7280" />
+      </div>
       <Navbar />
       <main className="grid h-full grid-rows-map gap-8 bg-base-100 py-6 px-16">
-        <Card className="p-0 overflow-hidden">
+        <Card className="overflow-hidden p-0">
           <ModelViewer data={buildingsData} navigator={navigate} />
         </Card>
         <Card>
