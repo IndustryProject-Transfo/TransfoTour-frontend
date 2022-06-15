@@ -26,7 +26,7 @@ function AboutModal({
           <div className="relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none">
             {/*header*/}
             <div className="flex items-start justify-between rounded-t border-b border-solid border-slate-200 p-4">
-              <h3 className="text-2xl font-semibold">About</h3>
+              <h3 className="text-2xl font-semibold">Over ons</h3>
               <button
                 className="float-right ml-auto border-0 bg-transparent  p-1 text-3xl font-semibold leading-none outline-none focus:outline-none"
                 onClick={() => onChange(false)}
@@ -64,7 +64,7 @@ function AboutModal({
                 <h1 className="mb-2 font-roboto text-xl font-bold text-gray-500">
                   Gemaakt door:
                 </h1>
-                <QRcode className="h-auto w-[30%]" />
+                <QRcode className="h-auto w-[25%]" />
                 <ul className="mt-2 inline-flex w-full items-center justify-center gap-2">
                   <li className="font-roboto">Aaron Carton</li>
                   <li>
