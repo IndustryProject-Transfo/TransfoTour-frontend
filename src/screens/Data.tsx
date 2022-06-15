@@ -69,7 +69,6 @@ export default () => {
 
   function getPrice() {
     get('https://api.airtable.com/v0/appS16VafPZAqBNVV/Prijs?').then((data) => {
-      console.log(data.records[0].fields)
       Object.keys(data.records[0].fields).length > 0 &&
         setPrice(data.records[0].fields.huidig_energieprijs)
     })
