@@ -1,5 +1,3 @@
-import { FieldSet } from 'airtable'
-
 interface large {
   url: string
 }
