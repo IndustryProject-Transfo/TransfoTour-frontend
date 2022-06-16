@@ -199,7 +199,7 @@ export default () => {
                     setTab('uur')
                   }}
                 >
-                  Dag
+                  Uur
                 </button>
                 <button
                   className={`${
@@ -221,7 +221,7 @@ export default () => {
                   }}
                   disabled={isLoading}
                 >
-                  Maand
+                  Dag
                 </button>
                 <button
                   className={`${
@@ -243,7 +243,7 @@ export default () => {
                   }}
                   disabled={isLoading}
                 >
-                  Jaar
+                  Maand
                 </button>
               </ul>
             ) : (
