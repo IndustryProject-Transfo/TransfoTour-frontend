@@ -79,7 +79,7 @@ export default () => {
               </div>
 
               <div className="flex flex-1 flex-col items-end justify-end">
-                <QRcode className="h-24 w-auto rounded bg-white p-1" />
+                <QRcode className="h-32 w-auto rounded bg-white p-1" />
               </div>
             </div>
           </Card>
